@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CiledugPromo VIP | Digital Architect & SEO God-Tier</title>
     
+    <!-- ⚡ PRELOAD LCP ASSETS (CRITICAL FOR 100/100 SCORE) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    </noscript>
+
     <!-- META DASAR & WHATSAPP PREVIEW (OPEN GRAPH) -->
     <meta name="description" content="Gudang Amunisi Digital & Portofolio VIP CiledugPromo. Dominasi Halaman 1 Google dengan Landing Page Kecepatan Ekstrem LCP < 0.8 Detik." />
     <meta property="og:title" content="CiledugPromo VIP | Digital Architect & SEO God-Tier" />
@@ -44,10 +52,11 @@
     }
     </script>
 
+    <!-- ⚡ TAUTAN TAILWIND CSS (LOKAL) -->
+    <!-- Jika Anda belum mengkompilasi Tailwind, gunakan skrip CDN di bawah ini sementara waktu -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Michroma&display=swap" rel="stylesheet" />
+    <!-- Jika sudah dikompilasi, HAPUS tag script di atas dan AKTIFKAN tag link di bawah ini -->
+    <!-- <link href="./dist/output.css" rel="stylesheet"> -->
     
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #F5F7FA; -webkit-font-smoothing: antialiased; }
@@ -64,6 +73,17 @@
             100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
         .cta-pulse { animation: pulse-ring 2s infinite; }
+
+        /* ⚡ CSS KILL-SWITCH UNTUK MOBILE (MEMATIKAN BEBAN GPU ANIMASI CANVAS) */
+        @media (max-width: 768px) {
+            #grid-canvas, .aura-background-component {
+                display: none !important;
+            }
+            * {
+                -webkit-transition: none !important;
+                transition: none !important;
+            }
+        }
     </style>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -417,6 +437,7 @@
           const gridZMin = 0, gridZMax = 3000, gridXMin = -4000, gridXMax = 4000;
 
           function animate() {
+              if (window.innerWidth <= 768) return; // KILL-SWITCH JS UNTUK MOBILE
               ctx.clearRect(0, 0, canvas.width, canvas.height);
               cameraX += (targetCameraX - cameraX) * 0.03;
               cameraY += (targetCameraY - cameraY) * 0.03;
